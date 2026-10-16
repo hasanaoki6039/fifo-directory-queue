@@ -32,3 +32,10 @@ The trade-off: throughput is bounded by filesystem operations (one `rename` and 
 ## The awkward edge
 
 Dequeue is a two-step operation: `dequeue()` renames the oldest ready file into a `lock/` file and returns its contents; the consumer must call `acknowledge()` to delete the lock once processing is done. If the process crashes between those steps the lock file stays on disk. Use `lock_names()` to discover such unfinished items and decide whether to reprocess them or discard them — the library does not guess for you.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
