@@ -50,3 +50,8 @@ The window stores values eagerly rather than keeping running aggregates. Running
 sums drift with floating point over long streams, and recomputing from a small
 buffer is cheap enough that the drift is not worth the speed.
 
+## Contributing
+
+Issues and pull requests are welcome. Please keep the dependency list empty —
+that constraint is the point of the project, not an oversight.
+
